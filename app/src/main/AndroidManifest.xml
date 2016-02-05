@@ -2,18 +2,29 @@
 <manifest package="com.grability.lookapp"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_lookapp_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <meta-data
+            android:name="roboguice.modules"
+            android:value="com.grability.lookapp.config.ConfigModule"/>
+
+        <activity android:name=".controllers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".controllers.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
