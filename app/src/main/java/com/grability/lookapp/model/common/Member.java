@@ -1,13 +1,14 @@
-package com.grability.lookapp.model;
+package com.grability.lookapp.model.common;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public class Member {
+public class Member implements Serializable {
 
     /** Member Label **/
     private String label;
@@ -42,5 +43,14 @@ public class Member {
      */
     public void setAttrs(Map<String, String> attrs) {
         this.attrs = attrs;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Member{");
+        sb.append("label='").append(label).append('\'');
+        sb.append(", attrs=").append(attrs);
+        sb.append('}');
+        return sb.toString();
     }
 }

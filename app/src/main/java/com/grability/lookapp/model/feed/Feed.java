@@ -1,6 +1,12 @@
-package com.grability.lookapp.model;
+package com.grability.lookapp.model.feed;
 
 import com.google.gson.annotations.SerializedName;
+import com.grability.lookapp.model.app.App;
+import com.grability.lookapp.model.common.Member;
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+
+import java.util.List;
 
 /**
  * This is the feed where all the apps information is located
@@ -9,30 +15,55 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Feed {
 
+    /** Local DB Id **/
+    @DatabaseField(generatedId = true)
+    private Integer localId;
+
     /** Feed Id **/
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member id;
 
     /** Feed author **/
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Author author;
 
-    /** Feed apps **/
+    /** Feed apps. Note: Stored in other table **/
     @SerializedName("entry")
-    private App[] apps;
+    private List<App> apps;
 
     /** Feed updated **/
+    @DatabaseField(dataType = DataType.SERIALIZABLE, canBeNull = false)
     private Member updated;
 
     /** Feed rights **/
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member rights;
 
     /** Feed title **/
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member title;
 
     /** Feed Icon **/
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member icon;
 
     /** Feed links **/
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member[] link;
+
+    /**
+     * @return the localId
+     */
+    public Integer getLocalId() {
+        return localId;
+    }
+
+    /**
+     * @return localId the localId to set
+     */
+    public void setLocalId(Integer localId) {
+        this.localId = localId;
+    }
 
     /**
      * @return the id
@@ -65,14 +96,14 @@ public class Feed {
     /**
      * @return the apps
      */
-    public App[] getApps() {
+    public List<App> getApps() {
         return apps;
     }
 
     /**
      * @return apps the apps to set
      */
-    public void setApps(App[] apps) {
+    public void setApps(List<App> apps) {
         this.apps = apps;
     }
 

@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.grability.lookapp.model.rest.LookAppGsonHttpMessageConverter;
 
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,6 +18,12 @@ import java.util.Map;
  * @author <a href="mailto:aajn88@gmail.com">Antonio A. Jimenez N.</a>
  */
 public final class RestUtils {
+
+    /** Default connection timeout **/
+    private static final int CONNECT_TIMEOUT = 5000;
+
+    /** Default read timeout **/
+    private static final int READ_TIMEOUT = 5000;
 
     /** Private default constructor * */
     private RestUtils() {}
@@ -154,6 +161,12 @@ public final class RestUtils {
      */
     private static RestTemplate buildRestTemplate(boolean multipartContent) {
         RestTemplate template = new RestTemplate();
+        SimpleClientHttpRequestFactory requestFactory = (SimpleClientHttpRequestFactory) template
+                .getRequestFactory();
+        if (requestFactory != null) {
+            requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
+            requestFactory.setReadTimeout(READ_TIMEOUT);
+        }
         template.getMessageConverters().add(0, new LookAppGsonHttpMessageConverter());
         if (multipartContent) {
             template.getMessageConverters().add(new FormHttpMessageConverter());

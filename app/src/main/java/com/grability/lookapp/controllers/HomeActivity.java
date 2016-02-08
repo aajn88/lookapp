@@ -6,12 +6,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
-import com.grability.lookapp.model.Feed;
 import com.grability.lookapp.services.api.IAppsService;
 
 import roboguice.activity.RoboActionBarActivity;
@@ -55,13 +53,6 @@ public class HomeActivity extends RoboActionBarActivity
 
         mNavigationView.setNavigationItemSelectedListener(this);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Feed feed = appsService.getFeed();
-                feed.toString();
-            }
-        }).start();
     }
 
     @Override
@@ -70,15 +61,8 @@ public class HomeActivity extends RoboActionBarActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finishAffinity();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
     }
 
     @Override
@@ -86,18 +70,27 @@ public class HomeActivity extends RoboActionBarActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id) {
+            case R.id.nav_whole_world:
+                break;
+            case R.id.nav_travel:
+                break;
+            case R.id.nav_social:
+                break;
+            case R.id.nav_photo_video:
+                break;
+            case R.id.nav_navigation:
+                break;
+            case R.id.nav_music:
+                break;
+            case R.id.nav_games:
+                break;
+            case R.id.nav_entertainment:
+                break;
+            case R.id.nav_education:
+                break;
+            case R.id.nav_share:
+                break;
         }
 
         mDrawer.closeDrawer(GravityCompat.START);

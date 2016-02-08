@@ -1,6 +1,6 @@
 package com.grability.lookapp.model.rest;
 
-import com.grability.lookapp.model.Feed;
+import com.grability.lookapp.model.feed.Feed;
 
 /**
  * This is a wrapper class where the requested feed will be located

@@ -1,9 +1,13 @@
-package com.grability.lookapp.model;
+package com.grability.lookapp.model.feed;
+
+import com.grability.lookapp.model.common.Member;
+
+import java.io.Serializable;
 
 /**
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public class Author {
+public class Author implements Serializable {
 
     /** Author Name **/
     private Member name;

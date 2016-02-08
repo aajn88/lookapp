@@ -1,6 +1,9 @@
-package com.grability.lookapp.model;
+package com.grability.lookapp.model.app;
 
 import com.google.gson.annotations.SerializedName;
+import com.grability.lookapp.model.common.Member;
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
 
 /**
  * This is the representation of a given app. This contains all the information about it
@@ -9,47 +12,77 @@ import com.google.gson.annotations.SerializedName;
  */
 public class App {
 
+    /** Local ID fot DB **/
+    @DatabaseField(id = true)
+    private Integer localId;
+
     /** App Id **/
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     private Member id;
 
     /** App name **/
     @SerializedName("im:name")
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     private Member name;
 
     /** App images **/
     @SerializedName("im:image")
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     private Member[] images;
 
     /** App summary **/
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     private Member summary;
 
     /** App price **/
     @SerializedName("im:price")
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     private Member price;
 
     /** App Content Type **/
     @SerializedName("im:contentType")
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member contentType;
 
     /** App Rights **/
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     private Member rights;
 
     /** App Title **/
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     private Member title;
 
     /** App Link **/
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member link;
 
     /** App Artist **/
     @SerializedName("im:artist")
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member artist;
 
     /** App Category **/
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     private Member category;
 
     /** App Release Date **/
     @SerializedName("im:releaseDate")
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private Member releaseDate;
+
+    /**
+     * @return the localId
+     */
+    public Integer getLocalId() {
+        return localId;
+    }
+
+    /**
+     * @return localId the localId to set
+     */
+    public void setLocalId(Integer localId) {
+        this.localId = localId;
+    }
 
     /**
      * @return the id
