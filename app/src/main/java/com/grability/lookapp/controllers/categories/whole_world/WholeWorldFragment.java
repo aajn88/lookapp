@@ -8,11 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.johnpersano.supertoasts.SuperToast;
+import com.github.johnpersano.supertoasts.util.Style;
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
 import com.grability.lookapp.model.app.Category;
 import com.grability.lookapp.services.api.IAppsService;
 import com.grability.lookapp.utils.ViewUtils;
+import com.grability.lookapp.views.progress_bars.ProgressWheel;
 import com.nhaarman.listviewanimations.appearance.AnimationAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
@@ -35,6 +38,10 @@ public class WholeWorldFragment extends RoboFragment {
     /** Categories DynamicListView **/
     @InjectView(R.id.categories_dlv)
     private DynamicListView mCategoriesDlv;
+
+    /** Loading ProgressWheel **/
+    @InjectView(R.id.loading_pw)
+    private ProgressWheel mLoadingPw;
 
     /** Apps Service **/
     @Inject
@@ -88,6 +95,26 @@ public class WholeWorldFragment extends RoboFragment {
     }
 
     /**
+     * This method enables/disables the loading Progress Wheel. This hides the Categories List View
+     * if it is necessary
+     *
+     * @param enable
+     *         True to enable/show and False to disable/hide the Progress Wheel
+     */
+    private void enableProgressWheel(boolean enable) {
+        mCategoriesDlv.setVisibility(enable ? View.GONE : View.VISIBLE);
+        mLoadingPw.setVisibility(enable ? View.VISIBLE : View.GONE);
+
+        if (mLoadingPw.isSpinning()) {
+            mLoadingPw.stopSpinning();
+        }
+
+        if (enable) {
+            mLoadingPw.spin();
+        }
+    }
+
+    /**
      * All activities that want to receive categories requests must to implement this interface
      */
     public interface OnCategoryRequestedListener {
@@ -107,6 +134,12 @@ public class WholeWorldFragment extends RoboFragment {
     private class InitialLoadingAsyncTask extends AsyncTask<Void, Void, List<Category>> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            enableProgressWheel(true);
+        }
+
+        @Override
         protected List<Category> doInBackground(Void... params) {
             return appsService.getCategories();
         }
@@ -114,8 +147,11 @@ public class WholeWorldFragment extends RoboFragment {
         @Override
         protected void onPostExecute(List<Category> categories) {
             super.onPostExecute(categories);
+            enableProgressWheel(false);
             if (categories == null) {
-                // TODO: Show error
+                ViewUtils.makeToast(getActivity(), R.string.error_loading,
+                        SuperToast.Duration.EXTRA_LONG, Style.RED).show();
+                return;
             }
             CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), categories);
             AnimationAdapter animAdapter = ViewUtils

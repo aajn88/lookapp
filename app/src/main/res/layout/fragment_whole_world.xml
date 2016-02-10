@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -9,5 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"/>
+
+    <com.grability.lookapp.views.progress_bars.ProgressWheel
+        android:id="@+id/loading_pw"
+        style="@style/ProgressBarStyle.Main"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:circleColor="@android:color/transparent"/>
 
 </FrameLayout>

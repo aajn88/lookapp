@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">LookApp</string>
 
+    <!-- Generic Strings -->
+    <string name="error_loading">¡Oops! An error has occurred :$</string>
+
     <!-- Transitions -->
     <string name="transition_view">transition_view</string>
     <string name="login">Login</string>
