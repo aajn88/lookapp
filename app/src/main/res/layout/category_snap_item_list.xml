@@ -1,9 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp">
 
     <!-- View for one Category -->
 
-</RelativeLayout>
+    <com.grability.lookapp.views.common.MaterialRippleLayout
+        style="@style/RippleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.grability.lookapp.views.font.RobotoTextView
+                android:id="@+id/category_title_rtv"
+                style="@style/TitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:alpha="0.87"
+                android:gravity="center_vertical"
+                android:text="Category Title"/>
+
+            <com.grability.lookapp.views.font.RobotoTextView
+                android:id="@+id/category_caption_rtv"
+                style="@style/CaptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/category_title_rtv"
+                android:alpha="0.54"
+                android:gravity="center_vertical"
+                android:text="Category Subtitle"/>
+        </RelativeLayout>
+    </com.grability.lookapp.views.common.MaterialRippleLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/apps_container_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

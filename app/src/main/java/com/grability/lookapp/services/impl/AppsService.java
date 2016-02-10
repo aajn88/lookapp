@@ -165,7 +165,7 @@ public class AppsService implements IAppsService {
     @Override
     public List<App> getAppsByCategory(int categoryId, int limit) {
 
-        Validate.isTrue(limit > 0, "The apps limit should by grater than 0");
+        Validate.isTrue(limit > 0 || limit == -1, "The apps limit should by grater than 0");
 
         if (currentFeed == null) {
             return null;

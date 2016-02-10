@@ -1,5 +1,7 @@
 package com.grability.lookapp.controllers;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,7 +12,10 @@ import android.view.MenuItem;
 
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
+import com.grability.lookapp.controllers.categories.whole_world.WholeWorldFragment;
 import com.grability.lookapp.services.api.IAppsService;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
@@ -23,7 +28,8 @@ import roboguice.inject.InjectView;
  */
 @ContentView(R.layout.activity_home)
 public class HomeActivity extends RoboActionBarActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        WholeWorldFragment.OnCategoryRequestedListener {
 
     /** Apps Service **/
     @Inject
@@ -53,6 +59,11 @@ public class HomeActivity extends RoboActionBarActivity
 
         mNavigationView.setNavigationItemSelectedListener(this);
 
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        if (!imageLoader.isInited()) {
+            imageLoader.init(ImageLoaderConfiguration.createDefault(this));
+        }
+
     }
 
     @Override
@@ -70,8 +81,10 @@ public class HomeActivity extends RoboActionBarActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Fragment fragment = null;
         switch (id) {
             case R.id.nav_whole_world:
+                fragment = WholeWorldFragment.newInstance();
                 break;
             case R.id.nav_travel:
                 break;
@@ -93,7 +106,23 @@ public class HomeActivity extends RoboActionBarActivity
                 break;
         }
 
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.main_content_rl, fragment).commit();
+        }
+
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * This method will be used when a category is requested
+     *
+     * @param categoryId
+     *         Category Id that must to be shown
+     */
+    @Override
+    public void onCategoryRequestedListener(int categoryId) {
+
     }
 }

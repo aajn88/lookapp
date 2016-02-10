@@ -5,12 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
 import com.grability.lookapp.model.app.App;
 import com.grability.lookapp.model.app.Category;
 import com.grability.lookapp.services.api.IAppsService;
+import com.grability.lookapp.utils.AttributesManager;
+import com.grability.lookapp.utils.ImageUtils;
 
 import java.util.List;
 
@@ -65,15 +70,44 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.category_snap_item_list, parent, false);
             holder = new Holder();
-            holder.apps = appsService.getAppsByCategory(currentCategory.getId());
+            holder.title = (TextView) convertView.findViewById(R.id.category_title_rtv);
+            holder.caption = (TextView) convertView.findViewById(R.id.category_caption_rtv);
+            holder.container = (LinearLayout) convertView.findViewById(R.id.apps_container_ll);
 
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
 
+        holder.container.removeAllViews();
+        for (App app : appsService.getAppsByCategory(currentCategory.getId(), 10)) {
+            holder.container.addView(createAppGoogleCard(app, holder.container));
+        }
+
+        holder.title.setText(currentCategory.getLabel());
+        holder.caption.setText(R.string.recommended_you);
 
         return convertView;
+    }
+
+    /**
+     * This method creates a Google Card based on a given app
+     *
+     * @param app
+     *         App to be converted to Google Card
+     *
+     * @return The Google Card
+     */
+    private View createAppGoogleCard(App app, ViewGroup parent) {
+        View card = inflater.inflate(R.layout.app_google_card, parent, false);
+
+        String url = AttributesManager.getLabel(app.getImages()[2]);
+        ImageView appThumb = (ImageView) card.findViewById(R.id.app_image_siv);
+        ImageUtils.displayImage(appThumb, url, null);
+        TextView appTitleTv = (TextView) card.findViewById(R.id.app_title_rtv);
+        appTitleTv.setText(AttributesManager.getLabel(app.getName()));
+
+        return card;
     }
 
     /**
@@ -81,7 +115,9 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
      */
     private class Holder {
 
-        List<App> apps;
+        TextView title;
+        TextView caption;
+        LinearLayout container;
 
     }
 }
