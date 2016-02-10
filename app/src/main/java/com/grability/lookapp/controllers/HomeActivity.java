@@ -13,11 +13,9 @@ import android.view.MenuItem;
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
 import com.grability.lookapp.controllers.categories.whole_world.WholeWorldFragment;
+import com.grability.lookapp.controllers.common.BaseActivity;
 import com.grability.lookapp.services.api.IAppsService;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
@@ -27,7 +25,7 @@ import roboguice.inject.InjectView;
  * @author <a href="mailto:aajn88@gmail.com">Antonio A. Jimenez N.</a>
  */
 @ContentView(R.layout.activity_home)
-public class HomeActivity extends RoboActionBarActivity
+public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         WholeWorldFragment.OnCategoryRequestedListener {
 
@@ -58,12 +56,6 @@ public class HomeActivity extends RoboActionBarActivity
         toggle.syncState();
 
         mNavigationView.setNavigationItemSelectedListener(this);
-
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        if (!imageLoader.isInited()) {
-            imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        }
-
     }
 
     @Override

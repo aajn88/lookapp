@@ -12,8 +12,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
 import com.grability.lookapp.R;
+import com.grability.lookapp.controllers.common.BaseActivity;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -24,7 +24,7 @@ import roboguice.inject.InjectView;
  * @author <a href="mailto:aajn88@gmail.com">Antonio A. Jimenez N.</a>
  */
 @ContentView(R.layout.activity_main)
-public class MainActivity extends RoboActionBarActivity {
+public class MainActivity extends BaseActivity {
 
     /** Constant for animations duration **/
     private static final int ANIM_DURATION = 1000;

@@ -23,12 +23,34 @@ public final class LookappUtils {
      *
      * @return True if the device is a tablet. False otherwise
      */
-    public boolean isTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout &
-                Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    public static boolean isTablet(Context context) {
+        return (getScreenSize(context)) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-    public void adjustScreenOrientation(Activity activity) {
+    /**
+     * This method returns the device screen size, e.g., {@link Configuration#SCREENLAYOUT_SIZE_LARGE},
+     * {@link Configuration#SCREENLAYOUT_SIZE_NORMAL} or {@link Configuration#SCREENLAYOUT_SIZE_SMALL}
+     *
+     * @param context
+     *         Current context
+     *
+     * @return This method returns the device screen size, e.g., {@link Configuration#SCREENLAYOUT_SIZE_LARGE},
+     * {@link Configuration#SCREENLAYOUT_SIZE_NORMAL} or {@link Configuration#SCREENLAYOUT_SIZE_SMALL}
+     */
+    public static int getScreenSize(Context context) {
+        return context.getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK;
+    }
+
+    /**
+     * This method adjust the screen orientation based on: Smartphones (from small size to normal
+     * size) is set to Landscape orientation and Tablets (large size) is set to Portrait
+     * orientation
+     *
+     * @param activity
+     *         The activity to be adjusted
+     */
+    public static void adjustScreenOrientation(Activity activity) {
         int orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         if (isTablet(activity)) {
             orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
