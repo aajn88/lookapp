@@ -5,12 +5,14 @@ import com.grability.lookapp.model.common.Member;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
+import java.io.Serializable;
+
 /**
  * This is the representation of a given app. This contains all the information about it
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public class App {
+public class App implements Serializable {
 
     /** Local ID fot DB **/
     @DatabaseField(id = true)

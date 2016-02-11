@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".controllers.detail.AppDetailActivity">
+
+    <include layout="@layout/lookapp_toolbar"/>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill"
+            android:scrollbarSize="0dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/google_cards_whole_background"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.grability.lookapp.views.shaped_images.ShapeImageView
+                        android:id="@+id/app_image_siv"
+                        style="@style/ImageViewStyle"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_gravity="center"
+                        android:transitionName="@string/transition_view"
+                        app:siShape="@raw/c"/>
+
+                    <com.grability.lookapp.views.font.RobotoTextView
+                        android:id="@+id/app_title_rtv"
+                        style="@style/TitleStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_toRightOf="@id/app_image_siv"
+                        android:text="App Title"/>
+
+                    <com.grability.lookapp.views.font.RobotoTextView
+                        android:id="@+id/app_rights_rtv"
+                        style="@style/CaptionStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/app_title_rtv"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_toRightOf="@id/app_image_siv"
+                        android:text="App Title"/>
+
+                    <com.grability.lookapp.views.circular_progress_bar.CircularProgressButton
+                        android:id="@+id/download_btn"
+                        style="@style/CircularProgressBarStyle.2"
+                        android:layout_alignParentRight="true"
+                        app:cpb_textComplete="@string/installed_caps"
+                        app:cpb_textIdle="@string/free_caps"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/summary_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="?attr/selectableItemBackground">
+
+                    <com.grability.lookapp.views.font.MaterialDesignIconsTextView
+                        android:id="@+id/summary_left_arrow_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_toLeftOf="@+id/summary_tv"
+                        android:text="@string/material_icon_chevron_down"
+                        android:textSize="12dp"/>
+
+                    <com.grability.lookapp.views.font.RobotoTextView
+                        android:id="@+id/summary_tv"
+                        style="@style/CaptionStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:alpha="0.54"
+                        android:text="@string/summary"/>
+
+                    <com.grability.lookapp.views.font.MaterialDesignIconsTextView
+                        android:id="@+id/summary_right_arrow_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@+id/summary_tv"
+                        android:text="@string/material_icon_chevron_down"
+                        android:textSize="12dp"/>
+                </RelativeLayout>
+
+                <com.grability.lookapp.views.font.RobotoTextView
+                    android:id="@+id/summary_content_tv"
+                    style="@style/Body1Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.54"
+                    android:gravity="center"
+                    android:maxLines="10"
+                    android:text="Summary Content"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

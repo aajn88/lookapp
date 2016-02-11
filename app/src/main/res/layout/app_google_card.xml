@@ -21,6 +21,7 @@
             android:layout_height="85dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
+            android:transitionName="@string/transition_view"
             app:siShape="@raw/c"/>
     </LinearLayout>
 

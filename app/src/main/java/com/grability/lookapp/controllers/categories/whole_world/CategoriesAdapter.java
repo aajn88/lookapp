@@ -1,6 +1,9 @@
 package com.grability.lookapp.controllers.categories.whole_world;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +14,11 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
+import com.grability.lookapp.controllers.detail.AppDetailActivity;
 import com.grability.lookapp.model.app.App;
 import com.grability.lookapp.model.app.Category;
 import com.grability.lookapp.services.api.IAppsService;
-import com.grability.lookapp.utils.AttributesManager;
+import com.grability.lookapp.utils.AttrsManager;
 import com.grability.lookapp.utils.ImageUtils;
 
 import java.util.List;
@@ -98,14 +102,30 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
      *
      * @return The Google Card
      */
-    private View createAppGoogleCard(App app, ViewGroup parent) {
+    private View createAppGoogleCard(final App app, ViewGroup parent) {
         View card = inflater.inflate(R.layout.app_google_card, parent, false);
 
-        String url = AttributesManager.getLabel(app.getImages()[2]);
-        ImageView appThumb = (ImageView) card.findViewById(R.id.app_image_siv);
+        String url = AttrsManager.getLabel(app.getImages()[2]);
+        final ImageView appThumb = (ImageView) card.findViewById(R.id.app_image_siv);
         ImageUtils.displayImage(appThumb, url, null);
+
         TextView appTitleTv = (TextView) card.findViewById(R.id.app_title_rtv);
-        appTitleTv.setText(AttributesManager.getLabel(app.getName()));
+        appTitleTv.setText(AttrsManager.getLabel(app.getName()));
+
+        TextView appCaptionTv = (TextView) card.findViewById(R.id.app_caption_rtv);
+        appCaptionTv.setText(AttrsManager.getLabel(app.getSummary()));
+
+        card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent appDetailIntent = new Intent(getContext(), AppDetailActivity.class);
+                appDetailIntent.putExtra(AppDetailActivity.SELECTED_APP_KEY, app);
+                ActivityOptionsCompat options = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation((Activity) getContext(), appThumb,
+                                getContext().getString(R.string.transition_view));
+                getContext().startActivity(appDetailIntent, options.toBundle());
+            }
+        });
 
         return card;
     }

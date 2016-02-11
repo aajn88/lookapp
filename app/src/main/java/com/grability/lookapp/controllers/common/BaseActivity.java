@@ -1,5 +1,6 @@
 package com.grability.lookapp.controllers.common;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import com.grability.lookapp.utils.LookappUtils;
@@ -27,4 +28,5 @@ public class BaseActivity extends RoboActionBarActivity {
 
         LookappUtils.adjustScreenOrientation(this);
     }
+
 }

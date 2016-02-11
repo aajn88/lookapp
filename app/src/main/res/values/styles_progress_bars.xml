@@ -23,4 +23,28 @@
         <item name="rimColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="CircularProgressBarStyle.2" parent="@style/CircularProgressBarStyle.Full">
+        <item name="cpb_selectorComplete">@drawable/cpb_idle_state_selector_full_complete</item>
+        <item name="cpb_selectorError">@drawable/cpb_idle_state_selector_full_error</item>
+    </style>
+
+    <style name="CircularProgressBarStyle.Full" parent="@style/CircularProgressBarStyle">
+        <item name="cpb_selectorIdle">@drawable/cpb_idle_state_selector_full</item>
+        <item name="cpb_selectorComplete">@drawable/cpb_idle_state_selector_full</item>
+        <item name="cpb_selectorError">@drawable/cpb_idle_state_selector_full</item>
+        <item name="android:textColor">@drawable/selector_text_full</item>
+    </style>
+
+    <!-- Circular Progress Bar styles (from package ~.view.cpb) -->
+    <style name="CircularProgressBarStyle">
+        <item name="android:layout_width">112sp</item>
+        <item name="android:layout_height">36sp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="cpb_textError">@string/error_caps</item>
+        <item name="android:textSize">14sp</item>
+        <item name="cpb_colorProgress">@android:color/transparent</item>
+        <item name="cpb_colorIndicator">@color/material_light_green_500</item>
+        <item name="cpb_colorIndicatorBackground">@color/material_light_green_500_20_percent</item>
+    </style>
+
 </resources>

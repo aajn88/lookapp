@@ -11,7 +11,7 @@ import com.grability.lookapp.model.app.Category;
 import com.grability.lookapp.model.feed.Feed;
 import com.grability.lookapp.model.rest.FeedResponse;
 import com.grability.lookapp.services.api.IAppsService;
-import com.grability.lookapp.utils.AttributesManager;
+import com.grability.lookapp.utils.AttrsManager;
 import com.grability.lookapp.utils.DateUtils;
 
 import org.apache.commons.lang3.Validate;
@@ -124,11 +124,11 @@ public class AppsService implements IAppsService {
         categories = new ArrayList<Category>();
         Set<Integer> categoriesSet = new HashSet<Integer>();
         for (App app : feed.getApps()) {
-            int categoryId = AttributesManager.getInt(app.getCategory(), AppAttribute.ID);
+            int categoryId = AttrsManager.getInt(app.getCategory(), AppAttribute.ID);
             if (!categoriesSet.contains(categoryId)) {
                 categoriesSet.add(categoryId);
 
-                String label = AttributesManager.getString(app.getCategory(), AppAttribute.LABEL);
+                String label = AttrsManager.getString(app.getCategory(), AppAttribute.LABEL);
                 categories.add(new Category(categoryId, label));
             }
         }
@@ -177,7 +177,7 @@ public class AppsService implements IAppsService {
                 return filteredApps;
             }
 
-            int appCatId = AttributesManager.getInt(app.getCategory(), AppAttribute.ID);
+            int appCatId = AttrsManager.getInt(app.getCategory(), AppAttribute.ID);
             if (categoryId == appCatId) {
                 filteredApps.add(app);
             }

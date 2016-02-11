@@ -10,10 +10,10 @@ import java.util.Date;
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public final class AttributesManager {
+public final class AttrsManager {
 
     /** Private constructor to avoid instances **/
-    private AttributesManager() {}
+    private AttrsManager() {}
 
     /**
      * This method returns the label field of {@link Member}

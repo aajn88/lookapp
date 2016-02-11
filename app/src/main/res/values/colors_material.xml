@@ -162,6 +162,7 @@
 
     <!-- Light Green -->
     <color name="material_light_green_500">#8bc248</color>
+    <color name="material_light_green_500_20_percent">#338bc248</color>
     <color name="material_light_green_50">#f1f7e9</color>
     <color name="material_light_green_100">#dbebc7</color>
     <color name="material_light_green_200">#c5e0a5</color>

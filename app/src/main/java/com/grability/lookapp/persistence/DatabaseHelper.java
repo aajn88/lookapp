@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "lookapp.db";
 
     /** DB Version **/
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     /** The connection source **/
     protected AndroidConnectionSource connectionSource = new AndroidConnectionSource(this);

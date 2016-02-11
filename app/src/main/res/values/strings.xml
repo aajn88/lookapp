@@ -3,6 +3,7 @@
 
     <!-- Generic Strings -->
     <string name="error_loading">¡Oops! An error has occurred :$</string>
+    <string name="error_caps">ERROR</string>
 
     <!-- Transitions -->
     <string name="transition_view">transition_view</string>
@@ -28,5 +29,10 @@
 
     <!-- Whole World -->
     <string name="recommended_you">Recommended for you</string>
+
+    <!-- App Detail -->
+    <string name="free_caps">FREE</string>
+    <string name="installed_caps">INSTALLED</string>
+    <string name="summary">Summary</string>
 
 </resources>
