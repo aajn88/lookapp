@@ -4,6 +4,7 @@
     <!-- Generic Strings -->
     <string name="error_loading">¡Oops! An error has occurred :$</string>
     <string name="error_caps">ERROR</string>
+    <string name="search_ellipsis">Search...</string>
 
     <!-- Transitions -->
     <string name="transition_view">transition_view</string>

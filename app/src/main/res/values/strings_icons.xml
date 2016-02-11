@@ -41,6 +41,7 @@
     <!-- Material Design Icons -->
     <string name="material_icon_account">&#xe800;</string>
     <string name="material_icon_account_multiple">&#xe8dc;</string>
+    <string name="material_icon_arrow_left">&#xe8f9;</string>
     <string name="material_icon_bookmark">&#xe921;</string>
     <string name="material_icon_bike">&#xe915;</string>
     <string name="material_icon_box_full">&#xe86b;</string>
@@ -53,6 +54,7 @@
     <string name="material_icon_cart">&#xe857;</string>
     <string name="material_icon_chevron_down">&#xe874;</string>
     <string name="material_icon_chevron_up">&#xe877;</string>
+    <string name="material_icon_close">&#xe887;</string>
     <string name="material_icon_date">&#xe848;</string>
     <string name="material_icon_drink">&#xea08;</string>
     <string name="material_icon_dollar">&#xe892;</string>

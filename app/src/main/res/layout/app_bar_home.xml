@@ -5,7 +5,14 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/lookapp_toolbar"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/lookapp_toolbar"/>
+
+        <include layout="@layout/searcher_layout"/>
+    </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/main_content_rl"

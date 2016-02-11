@@ -1,5 +1,6 @@
 package com.grability.lookapp.controllers;
 
+import android.animation.Animator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -9,12 +10,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
 import com.grability.lookapp.controllers.categories.whole_world.WholeWorldFragment;
 import com.grability.lookapp.controllers.common.BaseActivity;
 import com.grability.lookapp.services.api.IAppsService;
+import com.grability.lookapp.utils.AnimationsUtils;
+import com.grability.lookapp.utils.LookappUtils;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -29,6 +36,9 @@ public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         WholeWorldFragment.OnCategoryRequestedListener {
 
+    /** Duration of animation search in millis **/
+    private static final int DURATION_ANIM_SEARCH = 400;
+
     /** Apps Service **/
     @Inject
     private IAppsService appsService;
@@ -36,6 +46,22 @@ public class HomeActivity extends BaseActivity
     /** Main Toolbar **/
     @InjectView(R.id.toolbar)
     private Toolbar mToolbar;
+
+    /** Lookapp Logo **/
+    @InjectView(R.id.lookapp_logo_iv)
+    private ImageView mLookappLogoIv;
+
+    /** Searcher LinearLayout **/
+    @InjectView(R.id.searcher_ll)
+    private View mSearcherLl;
+
+    /** Searcher back Tv **/
+    @InjectView(R.id.searcher_back_mditv)
+    private TextView mSearcherBackTv;
+
+    /** Searcher EditText **/
+    @InjectView(R.id.searcher_et)
+    private EditText mSearcherEt;
 
     /** Main Drawer Layout **/
     @InjectView(R.id.drawer_layout)
@@ -56,6 +82,71 @@ public class HomeActivity extends BaseActivity
         toggle.syncState();
 
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        mSearcherLl.setVisibility(View.GONE);
+
+        mLookappLogoIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enableSearcher();
+            }
+        });
+
+        mSearcherBackTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                disableSearcher();
+            }
+        });
+    }
+
+    /**
+     * This method disables the Searcher Bar
+     */
+    private void disableSearcher() {
+        int[] location = new int[2];
+        mLookappLogoIv.getLocationOnScreen(location);
+        if (LookappUtils.isGraterLollipop()) {
+            Animator anim = AnimationsUtils
+                    .animateCircleRevealShow(mSearcherLl, location[0], location[1],
+                            DURATION_ANIM_SEARCH, true);
+
+            anim.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {}
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mSearcherLl.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    mSearcherLl.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {}
+            });
+            anim.start();
+            mSearcherEt.setText("");
+        } else {
+            mSearcherLl.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * This method enables the Searcher bar
+     */
+    private void enableSearcher() {
+        int[] location = new int[2];
+        mLookappLogoIv.getLocationOnScreen(location);
+        if (LookappUtils.isGraterLollipop()) {
+            AnimationsUtils.animateCircleRevealShow(mSearcherLl, location[0], location[1],
+                    DURATION_ANIM_SEARCH).start();
+        } else {
+            mSearcherLl.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

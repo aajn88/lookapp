@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 
 /**
  * This Utils class is for all generic methods that are not necessarily categorized
@@ -57,5 +58,14 @@ public final class LookappUtils {
         }
 
         activity.setRequestedOrientation(orientation);
+    }
+
+    /**
+     * This method checks if the current OS is grater or equals to Lollipop
+     *
+     * @return True if the current OS is grater or equal to Lollipop. False otherwise
+     */
+    public static boolean isGraterLollipop() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 }
