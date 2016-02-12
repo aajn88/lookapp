@@ -27,6 +27,7 @@ import com.grability.lookapp.controllers.common.IFilterRegister;
 import com.grability.lookapp.controllers.common.IFilterSubscriber;
 import com.grability.lookapp.services.api.IAppsService;
 import com.grability.lookapp.utils.AnimationsUtils;
+import com.grability.lookapp.utils.ImageUtils;
 import com.grability.lookapp.utils.LookappUtils;
 
 import java.util.HashSet;
@@ -42,8 +43,7 @@ import roboguice.inject.InjectView;
  */
 @ContentView(R.layout.activity_home)
 public class HomeActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        WholeWorldFragment.OnCategoryRequestedListener, IFilterRegister {
+        implements NavigationView.OnNavigationItemSelectedListener, IFilterRegister {
 
     /** Duration of animation search in millis **/
     private static final int DURATION_ANIM_SEARCH = 400;
@@ -102,6 +102,9 @@ public class HomeActivity extends BaseActivity
         toggle.syncState();
 
         mNavigationView.setNavigationItemSelectedListener(this);
+        ImageView userPic = (ImageView) mNavigationView.getHeaderView(0)
+                .findViewById(R.id.user_pic_siv);
+        ImageUtils.displayImage(userPic, getString(R.string.author_image), null);
 
         mSearcherLl.setVisibility(View.GONE);
 
@@ -242,17 +245,6 @@ public class HomeActivity extends BaseActivity
 
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    /**
-     * This method will be used when a category is requested
-     *
-     * @param categoryId
-     *         Category Id that must to be shown
-     */
-    @Override
-    public void onCategoryRequestedListener(int categoryId) {
-
     }
 
     /**

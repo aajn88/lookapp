@@ -1,6 +1,7 @@
 package com.grability.lookapp.controllers.common;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,28 +34,19 @@ public class AppsAdapter extends ArrayAdapter<App> {
 
     /** The original dataset **/
     private final List<App> mApps;
+
     /** The filter to be applied **/
     private final Filter mFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            List<App> apps = new ArrayList<App>();
 
             String[] words = constraint.toString().split(" +");
             for (int i = 0; i < words.length; i++) {
                 words[i] = words[i].toUpperCase();
             }
 
-            for (App app : mApps) {
-                String appName = AttrsManager.getLabel(app.getName()).toUpperCase();
-                boolean match = true;
-                for (int i = 0; i < words.length && match; i++) {
-                    match = appName.contains(words[i]);
-                }
-                if (match) {
-                    apps.add(app);
-                }
-            }
+            List<App> apps = findMatches(words);
 
             results.count = apps.size();
             results.values = apps;
@@ -71,6 +63,7 @@ public class AppsAdapter extends ArrayAdapter<App> {
             notifyDataSetChanged();
         }
     };
+
     /** Layout Inflater **/
     private LayoutInflater mInflater;
 
@@ -101,6 +94,31 @@ public class AppsAdapter extends ArrayAdapter<App> {
         super(context, R.layout.app_google_card, apps);
         mApps = new ArrayList<>(apps);
         init();
+    }
+
+    /**
+     * This method find matches for an array of given words. All words must to be contained in the
+     * App's name
+     *
+     * @param words
+     *         The words to be matched
+     *
+     * @return List of matched apps
+     */
+    @NonNull
+    private List<App> findMatches(String[] words) {
+        List<App> apps = new ArrayList<App>();
+        for (App app : mApps) {
+            String appName = AttrsManager.getLabel(app.getName()).toUpperCase();
+            boolean match = true;
+            for (int i = 0; i < words.length && match; i++) {
+                match = appName.contains(words[i]);
+            }
+            if (match) {
+                apps.add(app);
+            }
+        }
+        return apps;
     }
 
     /**
@@ -146,8 +164,11 @@ public class AppsAdapter extends ArrayAdapter<App> {
      * This is the Holder class for HolderView pattern
      */
     private class Holder {
+        /** App image **/
         ImageView image;
+        /** App title **/
         TextView title;
+        /** App caption **/
         TextView caption;
     }
 }

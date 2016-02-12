@@ -20,6 +20,7 @@ import com.grability.lookapp.model.app.Category;
 import com.grability.lookapp.services.api.IAppsService;
 import com.grability.lookapp.utils.AttrsManager;
 import com.grability.lookapp.utils.ImageUtils;
+import com.grability.lookapp.utils.LookappUtils;
 
 import java.util.List;
 
@@ -120,10 +121,14 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
             public void onClick(View v) {
                 Intent appDetailIntent = new Intent(getContext(), AppDetailActivity.class);
                 appDetailIntent.putExtra(AppDetailActivity.SELECTED_APP_KEY, app);
-                ActivityOptionsCompat options = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation((Activity) getContext(), appThumb,
-                                getContext().getString(R.string.transition_view));
-                getContext().startActivity(appDetailIntent, options.toBundle());
+                if (LookappUtils.isGraterLollipop()) {
+                    ActivityOptionsCompat options = ActivityOptionsCompat
+                            .makeSceneTransitionAnimation((Activity) getContext(), appThumb,
+                                    getContext().getString(R.string.transition_view));
+                    getContext().startActivity(appDetailIntent, options.toBundle());
+                } else {
+                    getContext().startActivity(appDetailIntent);
+                }
             }
         });
 

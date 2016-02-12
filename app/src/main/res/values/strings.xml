@@ -5,9 +5,13 @@
     <string name="error_loading">¡Oops! An error has occurred :$</string>
     <string name="error_caps">ERROR</string>
     <string name="search_ellipsis">Search...</string>
+    <string name="author">Antonio A. Jiménez N.</string>
+    <string name="author_email">aajn88@gmail.com</string>
+    <string name="author_image">https://avatars3.githubusercontent.com/u/5447552?v=3&amp;s=460</string>
 
     <!-- Transitions -->
     <string name="transition_view">transition_view</string>
+    <string name="transition_textview">transition_textview</string>
     <string name="login">Login</string>
     <string name="title_activity_home">HomeActivity</string>
 

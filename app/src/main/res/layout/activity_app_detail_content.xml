@@ -24,7 +24,7 @@
             android:scrollbars="none">
 
             <LinearLayout
-                android:layout_width="400dp"
+                android:layout_width="500dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
@@ -50,12 +50,15 @@
                     <com.grability.lookapp.views.font.RobotoTextView
                         android:id="@+id/app_title_rtv"
                         style="@style/TitleStyle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
+                        android:layout_toLeftOf="@+id/download_btn"
                         android:layout_toRightOf="@id/app_image_siv"
-                        android:text="App Title"/>
+                        android:singleLine="true"
+                        android:text="App Title"
+                        android:transitionName="@string/transition_textview"/>
 
                     <com.grability.lookapp.views.font.RobotoTextView
                         android:id="@+id/app_rights_rtv"
@@ -65,7 +68,9 @@
                         android:layout_below="@id/app_title_rtv"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
+                        android:layout_toLeftOf="@+id/download_btn"
                         android:layout_toRightOf="@id/app_image_siv"
+                        android:maxLines="2"
                         android:text="App Title"/>
 
                     <com.grability.lookapp.views.circular_progress_bar.CircularProgressButton
@@ -123,6 +128,7 @@
                     android:maxLines="10"
                     android:text="Summary Content"
                     android:visibility="gone"/>
+
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

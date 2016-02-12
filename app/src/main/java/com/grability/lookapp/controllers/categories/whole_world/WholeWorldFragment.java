@@ -3,7 +3,6 @@ package com.grability.lookapp.controllers.categories.whole_world;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +25,11 @@ import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 /**
- * A simple {@link Fragment} subclass. Activities that contain this fragment must implement the
- * {@link OnCategoryRequestedListener} interface to handle interaction events. Use the {@link
- * WholeWorldFragment#newInstance} factory method to create an instance of this fragment.
+ * This is where the whole world of apps is shown
+ *
+ * @author <a href="mailto:aajn88@gmail.com">Antonio A. Jimenez N.</a>
  */
 public class WholeWorldFragment extends RoboFragment {
-
-    /** Listener for Category calls **/
-    private OnCategoryRequestedListener mListener;
 
     /** Categories DynamicListView **/
     @InjectView(R.id.categories_dlv)
@@ -80,18 +76,6 @@ public class WholeWorldFragment extends RoboFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnCategoryRequestedListener) {
-            mListener = (OnCategoryRequestedListener) context;
-        } else {
-            throw new RuntimeException(
-                    context.toString() + " must implement OnCategoryRequestedListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     /**
@@ -112,20 +96,6 @@ public class WholeWorldFragment extends RoboFragment {
         if (enable) {
             mLoadingPw.spin();
         }
-    }
-
-    /**
-     * All activities that want to receive categories requests must to implement this interface
-     */
-    public interface OnCategoryRequestedListener {
-
-        /**
-         * This method will be used when a category is requested
-         *
-         * @param categoryId
-         *         Category Id that must to be shown
-         */
-        void onCategoryRequestedListener(int categoryId);
     }
 
     /**

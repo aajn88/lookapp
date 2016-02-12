@@ -1,6 +1,5 @@
 package com.grability.lookapp.controllers.common;
 
-import android.os.Build;
 import android.os.Bundle;
 
 import com.grability.lookapp.utils.LookappUtils;

@@ -2,15 +2,20 @@ package com.grability.lookapp.controllers.common;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
+import com.grability.lookapp.controllers.detail.AppDetailActivity;
 import com.grability.lookapp.model.app.App;
 import com.grability.lookapp.model.feed.Feed;
 import com.grability.lookapp.services.api.IAppsService;
@@ -23,6 +28,7 @@ import java.util.List;
 import java.util.Random;
 
 import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 
 /**
@@ -43,6 +49,14 @@ public class AppsViewerFragment extends RoboFragment implements IFilterSubscribe
 
     /** Filter Register **/
     private IFilterRegister mFilterRegister;
+
+    /** Transition View String **/
+    @InjectResource(R.string.transition_view)
+    private String mTransitionView;
+
+    /** Transition Text View String **/
+    @InjectResource(R.string.transition_textview)
+    private String mTransitionTextView;
 
     /** Default constructor **/
     public AppsViewerFragment() {
@@ -94,6 +108,28 @@ public class AppsViewerFragment extends RoboFragment implements IFilterSubscribe
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mAppsContainer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                App app = (App) mAppsContainer.getItemAtPosition(position);
+                Intent appDetailIntent = new Intent(getActivity(), AppDetailActivity.class);
+                appDetailIntent.putExtra(AppDetailActivity.SELECTED_APP_KEY, app);
+
+                if (LookappUtils.isGraterLollipop()) {
+                    Pair<View, String>[] pairs = new Pair[2];
+                    pairs[0] = new Pair<View, String>(view.findViewById(R.id.app_image_siv),
+                            mTransitionView);
+                    pairs[1] = new Pair<View, String>(view.findViewById(R.id.app_title_rtv),
+                            mTransitionTextView);
+                    ActivityOptionsCompat options = ActivityOptionsCompat
+                            .makeSceneTransitionAnimation(getActivity(), pairs);
+                    getActivity().startActivity(appDetailIntent, options.toBundle());
+                } else {
+                    getActivity().startActivity(appDetailIntent);
+                }
+            }
+        });
 
         new LoadAppsAsyncTask().execute();
     }

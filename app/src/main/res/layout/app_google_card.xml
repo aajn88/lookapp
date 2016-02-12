@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:alpha="0.87"
             android:singleLine="true"
+            android:transitionName="@string/transition_textview"
             android:text="App title"/>
 
         <com.grability.lookapp.views.font.RobotoTextView

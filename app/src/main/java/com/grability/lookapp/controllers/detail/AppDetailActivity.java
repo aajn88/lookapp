@@ -1,6 +1,5 @@
 package com.grability.lookapp.controllers.detail;
 
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,8 +18,6 @@ import com.grability.lookapp.model.app.App;
 import com.grability.lookapp.utils.AttrsManager;
 import com.grability.lookapp.utils.ImageUtils;
 import com.grability.lookapp.views.circular_progress_bar.CircularProgressButton;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.Random;
 
@@ -28,42 +25,56 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_app_detail_content)
-public class AppDetailActivity extends BaseActivity implements ImageLoadingListener {
+public class AppDetailActivity extends BaseActivity {
 
     /** Key for the selected App **/
     public static final String SELECTED_APP_KEY = "SELECTED_APP_KEY";
 
     /** Currency Format **/
-    public static final String CURRENCY_FORMAT = "%1$,.2f";
+    private static final String CURRENCY_FORMAT = "%1$,.2f";
 
     /** Tag for Logs **/
     private static final String TAG_LOG = AppDetailActivity.class.getName();
+
     /** Random instance **/
     private final Random mRandom = new Random();
+
     /** App Image **/
     @InjectView(R.id.app_image_siv)
     private ImageView mAppImageSiv;
+
     /** Download Btn **/
     @InjectView(R.id.download_btn)
     private CircularProgressButton mDownloadBtn;
+
     /** Summary Content TextView **/
     @InjectView(R.id.summary_content_tv)
     private TextView mSummaryContentTv;
+
+    /** App Title **/
+    @InjectView(R.id.app_title_rtv)
+    private TextView mAppTitleRtv;
+
     /** App Rights TextView **/
     @InjectView(R.id.app_rights_rtv)
     private TextView mRightsRtv;
+
     /** Down Left Arrow **/
     @InjectView(R.id.summary_left_arrow_tv)
     private View mDownLeftArrow;
+
     /** Down Left Arrow **/
     @InjectView(R.id.summary_right_arrow_tv)
     private View mDownRightArrow;
+
     /** Summary RelativeLayout **/
     @InjectView(R.id.summary_rl)
     private View mSummaryRl;
+
     /** Toolbar **/
     @InjectView(R.id.toolbar)
     private Toolbar mToolbar;
+
     /** Selected APP **/
     private App mSelectedApp;
 
@@ -157,9 +168,10 @@ public class AppDetailActivity extends BaseActivity implements ImageLoadingListe
      * This method loads app information
      */
     private void loadApp() {
+        mAppTitleRtv.setText(AttrsManager.getLabel(mSelectedApp.getName()));
         mSummaryContentTv.setText(AttrsManager.getLabel(mSelectedApp.getSummary()));
         String url = AttrsManager.getLabel(mSelectedApp.getImages()[2]);
-        ImageUtils.displayImage(mAppImageSiv, url, this);
+        ImageUtils.displayImage(mAppImageSiv, url, null);
 
         float price = AttrsManager.getFloat(mSelectedApp.getPrice(), AppAttribute.AMOUNT);
         String priceStr = (price == 0.0f ? getString(R.string.free_caps) :
@@ -167,63 +179,6 @@ public class AppDetailActivity extends BaseActivity implements ImageLoadingListe
         mDownloadBtn.setIdleText(priceStr);
         mRightsRtv.setText(AttrsManager.getLabel(mSelectedApp.getRights()));
     }
-
-    /**
-     * Is called when image loading task was started
-     *
-     * @param imageUri
-     *         Loading image URI
-     * @param view
-     *         View for image
-     */
-    @Override
-    public void onLoadingStarted(String imageUri, View view) {}
-
-    /**
-     * Is called when an error was occurred during image loading
-     *
-     * @param imageUri
-     *         Loading image URI
-     * @param view
-     *         View for image. Can be <b>null</b>.
-     * @param failReason
-     *         {@linkplain FailReason The reason} why image
-     */
-    @Override
-    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            startPostponedEnterTransition();
-        }
-    }
-
-    /**
-     * Is called when image is loaded successfully (and displayed in View if one was specified)
-     *
-     * @param imageUri
-     *         Loaded image URI
-     * @param view
-     *         View for image. Can be <b>null</b>.
-     * @param loadedImage
-     *         Bitmap of loaded and decoded image
-     */
-    @Override
-    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            startPostponedEnterTransition();
-        }
-    }
-
-    /**
-     * Is called when image loading task was cancelled because View for image was reused in newer
-     * task
-     *
-     * @param imageUri
-     *         Loading image URI
-     * @param view
-     *         View for image. Can be <b>null</b>.
-     */
-    @Override
-    public void onLoadingCancelled(String imageUri, View view) {}
 
     /**
      * This class simulates the progress of the download

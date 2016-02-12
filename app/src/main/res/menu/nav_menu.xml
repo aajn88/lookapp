@@ -6,38 +6,6 @@
             android:id="@+id/nav_whole_world"
             android:icon="@drawable/ic_earth"
             android:title="@string/all_apps_menu"/>
-        <item
-            android:id="@+id/nav_travel"
-            android:icon="@drawable/ic_airplane"
-            android:title="@string/travel_menu"/>
-        <item
-            android:id="@+id/nav_social"
-            android:icon="@drawable/ic_like"
-            android:title="@string/social_menu"/>
-        <item
-            android:id="@+id/nav_photo_video"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/photo_video_menu"/>
-        <item
-            android:id="@+id/nav_navigation"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/navigation_menu"/>
-        <item
-            android:id="@+id/nav_music"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/music_menu"/>
-        <item
-            android:id="@+id/nav_games"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/games_menu"/>
-        <item
-            android:id="@+id/nav_entertainment"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/entertainment_menu"/>
-        <item
-            android:id="@+id/nav_education"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/education_menu"/>
     </group>
 
     <item android:title="Communicate">
