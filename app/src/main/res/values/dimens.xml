@@ -8,4 +8,5 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="cpb_stroke_width">4dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
 </resources>

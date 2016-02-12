@@ -22,7 +22,7 @@ import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import java.util.List;
 import java.util.Random;
 
-import roboguice.fragment.provided.RoboFragment;
+import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 /**

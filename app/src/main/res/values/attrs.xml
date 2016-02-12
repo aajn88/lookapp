@@ -26,7 +26,7 @@
         <attr name="linear_layout_ratio" format="float"/>
     </declare-styleable>
     <declare-styleable name="MaterialRippleLayout">
-        <attr name="materialRippleColor" format="color" />
+        <attr name="materialRippleColor" format="color"/>
         <attr name="rippleDimension" format="dimension"/>
         <attr name="rippleOverlay" format="boolean"/>
         <attr name="rippleAlpha" format="float"/>
