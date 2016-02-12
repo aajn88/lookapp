@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +111,7 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
         final ImageView appThumb = (ImageView) card.findViewById(R.id.app_image_siv);
         ImageUtils.displayImage(appThumb, url, null);
 
-        TextView appTitleTv = (TextView) card.findViewById(R.id.app_title_rtv);
+        final TextView appTitleTv = (TextView) card.findViewById(R.id.app_title_rtv);
         appTitleTv.setText(AttrsManager.getLabel(app.getName()));
 
         TextView appCaptionTv = (TextView) card.findViewById(R.id.app_caption_rtv);
@@ -122,9 +123,14 @@ public class CategoriesAdapter extends ArrayAdapter<Category> {
                 Intent appDetailIntent = new Intent(getContext(), AppDetailActivity.class);
                 appDetailIntent.putExtra(AppDetailActivity.SELECTED_APP_KEY, app);
                 if (LookappUtils.isGraterLollipop()) {
+                    String transitionView = getContext().getString(R.string.transition_view);
+                    String transitionTextView =
+                            getContext().getString(R.string.transition_textview);
+                    Pair<View, String>[] pairs = new Pair[2];
+                    pairs[0] = new Pair<View, String>(appThumb, transitionView);
+                    pairs[1] = new Pair<View, String>(appTitleTv, transitionTextView);
                     ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeSceneTransitionAnimation((Activity) getContext(), appThumb,
-                                    getContext().getString(R.string.transition_view));
+                            .makeSceneTransitionAnimation((Activity) getContext(), pairs);
                     getContext().startActivity(appDetailIntent, options.toBundle());
                 } else {
                     getContext().startActivity(appDetailIntent);
