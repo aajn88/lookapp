@@ -15,7 +15,9 @@
             android:name="roboguice.modules"
             android:value="com.grability.lookapp.config.ConfigModule"/>
 
-        <activity android:name=".controllers.MainActivity">
+        <activity
+            android:name=".controllers.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,9 +26,12 @@
         </activity>
         <activity
             android:name=".controllers.HomeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_activity_home">
         </activity>
-        <activity android:name=".controllers.detail.AppDetailActivity">
+        <activity
+            android:name=".controllers.detail.AppDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden">
         </activity>
     </application>
 

@@ -2,6 +2,7 @@ package com.grability.lookapp.controllers;
 
 import android.animation.Animator;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -116,6 +117,10 @@ public class HomeActivity extends BaseActivity
         });
 
         setUpSearch();
+
+        MenuItem item = mNavigationView.getMenu().getItem(0);
+        item.setChecked(true);
+        onNavigationItemSelected(item);
     }
 
     /**
@@ -241,6 +246,9 @@ public class HomeActivity extends BaseActivity
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.main_content_rl, fragment).commit();
+            if (fragment instanceof IFragmentInfo) {
+                getSupportActionBar().setTitle(((IFragmentInfo) fragment).getMenuNameId());
+            }
         }
 
         mDrawer.closeDrawer(GravityCompat.START);
@@ -256,6 +264,20 @@ public class HomeActivity extends BaseActivity
     @Override
     public void register(IFilterSubscriber subscriber) {
         subscribers.add(subscriber);
+    }
+
+    /**
+     * This interface is used to request basic fragment information
+     */
+    public interface IFragmentInfo {
+
+        /**
+         * This method returns the Fragment Name Resource Id
+         *
+         * @return The String Res Id of the name of the fragment
+         */
+        @StringRes
+        int getMenuNameId();
     }
 
     /**

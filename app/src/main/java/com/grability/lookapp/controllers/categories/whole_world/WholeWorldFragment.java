@@ -11,6 +11,7 @@ import com.github.johnpersano.supertoasts.SuperToast;
 import com.github.johnpersano.supertoasts.util.Style;
 import com.google.inject.Inject;
 import com.grability.lookapp.R;
+import com.grability.lookapp.controllers.HomeActivity;
 import com.grability.lookapp.model.app.Category;
 import com.grability.lookapp.services.api.IAppsService;
 import com.grability.lookapp.utils.ViewUtils;
@@ -29,7 +30,7 @@ import roboguice.inject.InjectView;
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio A. Jimenez N.</a>
  */
-public class WholeWorldFragment extends RoboFragment {
+public class WholeWorldFragment extends RoboFragment implements HomeActivity.IFragmentInfo {
 
     /** Categories DynamicListView **/
     @InjectView(R.id.categories_dlv)
@@ -96,6 +97,16 @@ public class WholeWorldFragment extends RoboFragment {
         if (enable) {
             mLoadingPw.spin();
         }
+    }
+
+    /**
+     * This method returns the Fragment Name Resource Id
+     *
+     * @return The String Res Id of the name of the fragment
+     */
+    @Override
+    public int getMenuNameId() {
+        return R.string.all_apps_menu;
     }
 
     /**

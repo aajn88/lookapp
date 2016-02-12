@@ -142,7 +142,9 @@ public class AppsViewerFragment extends RoboFragment implements IFilterSubscribe
      */
     @Override
     public void filter(CharSequence s) {
-        mAdapter.getFilter().filter(s);
+        if(mAdapter != null && mAdapter.getFilter() != null) {
+            mAdapter.getFilter().filter(s);
+        }
     }
 
     /**
